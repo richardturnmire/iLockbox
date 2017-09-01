@@ -1,0 +1,751 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="2.0" xmlns:edmx="http://schemas.microsoft.com/ado/2008/10/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+    <Schema Namespace="ilockboxModel.Store" Alias="Self" Provider="System.Data.SqlClient" ProviderManifestToken="2000" xmlns="http://schemas.microsoft.com/ado/2009/02/edm/ssdl">
+        <EntityContainer Name="ilockboxModelStoreContainer">
+          <EntitySet Name="Batchmodetbl" EntityType="ilockboxModel.Store.Batchmodetbl" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Batchtbl" EntityType="ilockboxModel.Store.Batchtbl" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="BatchValue" EntityType="ilockboxModel.Store.BatchValue" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="DetailTbl" EntityType="ilockboxModel.Store.DetailTbl" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="ImgTbl" EntityType="ilockboxModel.Store.ImgTbl" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="ItemSelectTbl" EntityType="ilockboxModel.Store.ItemSelectTbl" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <EntitySet Name="Wrksrctbl" EntityType="ilockboxModel.Store.Wrksrctbl" store:Type="Tables" Schema="dbo" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" />
+          <AssociationSet Name="FK_Batchmodetbl_Wrksrctbl1" Association="ilockboxModel.Store.FK_Batchmodetbl_Wrksrctbl1">
+            <End Role="Wrksrctbl" EntitySet="Wrksrctbl" />
+            <End Role="Batchmodetbl" EntitySet="Batchmodetbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batchtbl_Wrksrctbl" Association="ilockboxModel.Store.FK_Batchtbl_Wrksrctbl">
+            <End Role="Wrksrctbl" EntitySet="Wrksrctbl" />
+            <End Role="Batchtbl" EntitySet="Batchtbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BatchValue_Wrksrctbl" Association="ilockboxModel.Store.FK_BatchValue_Wrksrctbl">
+            <End Role="Wrksrctbl" EntitySet="Wrksrctbl" />
+            <End Role="BatchValue" EntitySet="BatchValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailTbl_Batchtbl1" Association="ilockboxModel.Store.FK_DetailTbl_Batchtbl1">
+            <End Role="Batchtbl" EntitySet="Batchtbl" />
+            <End Role="DetailTbl" EntitySet="DetailTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ImgTbl_Wrksrctbl" Association="ilockboxModel.Store.FK_ImgTbl_Wrksrctbl">
+            <End Role="Wrksrctbl" EntitySet="Wrksrctbl" />
+            <End Role="ImgTbl" EntitySet="ImgTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemSelectTbl_Wrksrctbl" Association="ilockboxModel.Store.FK_ItemSelectTbl_Wrksrctbl">
+            <End Role="Wrksrctbl" EntitySet="Wrksrctbl" />
+            <End Role="ItemSelectTbl" EntitySet="ItemSelectTbl" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Batchmodetbl">
+          <Key>
+            <PropertyRef Name="WorkSource" />
+            <PropertyRef Name="SubSet" />
+            <PropertyRef Name="BatchMode" />
+          </Key>
+          <Property Name="WorkSource" Type="char" Nullable="false" MaxLength="10" />
+          <Property Name="SubSet" Type="smallint" Nullable="false" />
+          <Property Name="BatchMode" Type="smallint" Nullable="false" />
+          <Property Name="Name" Type="char" MaxLength="10" />
+        </EntityType>
+        <EntityType Name="Batchtbl">
+          <Key>
+            <PropertyRef Name="ProcessDt" />
+            <PropertyRef Name="WorkSource" />
+            <PropertyRef Name="SubSet" />
+            <PropertyRef Name="BatchNumber" />
+          </Key>
+          <Property Name="ProcessDt" Type="smalldatetime" Nullable="false" />
+          <Property Name="WorkSource" Type="char" Nullable="false" MaxLength="10" />
+          <Property Name="SubSet" Type="smallint" Nullable="false" />
+          <Property Name="BatchNumber" Type="char" Nullable="false" MaxLength="10" />
+          <Property Name="Status" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="BatchValue">
+          <Key>
+            <PropertyRef Name="WorkSource" />
+            <PropertyRef Name="SubSet" />
+            <PropertyRef Name="BatchMode" />
+          </Key>
+          <Property Name="WorkSource" Type="char" Nullable="false" MaxLength="10" />
+          <Property Name="SubSet" Type="smallint" Nullable="false" />
+          <Property Name="BatchMode" Type="smallint" Nullable="false" />
+          <Property Name="SelectedBatchValue" Type="smallint" Nullable="false" />
+          <Property Name="NextBatchValue" Type="smallint" />
+          <Property Name="WaitToUpdate" Type="char" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="DetailTbl">
+          <Key>
+            <PropertyRef Name="SiteId" />
+            <PropertyRef Name="ProcessDt" />
+            <PropertyRef Name="WorkSource" />
+            <PropertyRef Name="SubSet" />
+            <PropertyRef Name="BatchNumber" />
+            <PropertyRef Name="TranNo" />
+            <PropertyRef Name="SeqNo" />
+            <PropertyRef Name="SubSeqNo" />
+          </Key>
+          <Property Name="SiteId" Type="smallint" Nullable="false" />
+          <Property Name="ProcessDt" Type="smalldatetime" Nullable="false" />
+          <Property Name="WorkSource" Type="char" Nullable="false" MaxLength="10" />
+          <Property Name="SubSet" Type="smallint" Nullable="false" />
+          <Property Name="BatchNumber" Type="char" Nullable="false" MaxLength="10" />
+          <Property Name="TranNo" Type="int" Nullable="false" />
+          <Property Name="SeqNo" Type="int" Nullable="false" />
+          <Property Name="SubSeqNo" Type="int" Nullable="false" />
+          <Property Name="P1ImgSeqNo" Type="int" />
+          <Property Name="P2ImgSeqNo" Type="int" />
+          <Property Name="ItemType" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="BatchType" Type="smallint" Nullable="false" />
+          <Property Name="UserFlag1" Type="char" MaxLength="16" />
+          <Property Name="UserFlag2" Type="char" MaxLength="16" />
+          <Property Name="UserFlag3" Type="char" MaxLength="16" />
+          <Property Name="UserFlag4" Type="char" MaxLength="16" />
+          <Property Name="UserInt1" Type="int" />
+          <Property Name="UserInt2" Type="int" />
+          <Property Name="UserInt3" Type="int" />
+          <Property Name="UserString1" Type="char" MaxLength="16" />
+          <Property Name="UserString2" Type="char" MaxLength="16" />
+          <Property Name="UserString3" Type="char" MaxLength="16" />
+          <Property Name="SubType" Type="char" MaxLength="1" />
+          <Property Name="UserFlag5" Type="char" MaxLength="40" />
+          <Property Name="UserFlag6" Type="char" MaxLength="16" />
+        </EntityType>
+        <EntityType Name="ImgTbl">
+          <Key>
+            <PropertyRef Name="WorkSource" />
+            <PropertyRef Name="SubSet" />
+            <PropertyRef Name="BatchMode" />
+          </Key>
+          <Property Name="WorkSource" Type="char" Nullable="false" MaxLength="10" />
+          <Property Name="SubSet" Type="smallint" Nullable="false" />
+          <Property Name="BatchMode" Type="smallint" Nullable="false" />
+          <Property Name="ImageDisp" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="ImagePost" Type="char" Nullable="false" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="ItemSelectTbl">
+          <Key>
+            <PropertyRef Name="WorkSource" />
+            <PropertyRef Name="SubSet" />
+            <PropertyRef Name="BatchMode" />
+          </Key>
+          <Property Name="WorkSource" Type="char" Nullable="false" MaxLength="10" />
+          <Property Name="SubSet" Type="smallint" Nullable="false" />
+          <Property Name="BatchMode" Type="smallint" Nullable="false" />
+          <Property Name="ItemDisp" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="ItemPost" Type="char" Nullable="false" MaxLength="1" />
+        </EntityType>
+        <EntityType Name="Wrksrctbl">
+          <Key>
+            <PropertyRef Name="WorkSource" />
+            <PropertyRef Name="SubSet" />
+          </Key>
+          <Property Name="WorkSource" Type="char" Nullable="false" MaxLength="10" />
+          <Property Name="SubSet" Type="smallint" Nullable="false" />
+          <Property Name="Name" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="ImagePath" Type="char" Nullable="false" MaxLength="80" />
+          <Property Name="XmlPath" Type="char" Nullable="false" MaxLength="80" />
+          <Property Name="AutoTrans" Type="char" Nullable="false" MaxLength="1" />
+          <Property Name="BelongsToGroup" Type="varchar" Nullable="false" MaxLength="60" />
+          <Property Name="XmlImagePath" Type="varchar" MaxLength="80" />
+          <Property Name="SiteID" Type="smallint" Nullable="false" />
+          <Property Name="ItemFilter" Type="char" MaxLength="20" />
+          <Property Name="IsItActive" Type="char" Nullable="false" MaxLength="1" />
+        </EntityType>
+        <Association Name="FK_Batchmodetbl_Wrksrctbl1">
+          <End Role="Wrksrctbl" Type="ilockboxModel.Store.Wrksrctbl" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Batchmodetbl" Type="ilockboxModel.Store.Batchmodetbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wrksrctbl">
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+            </Principal>
+            <Dependent Role="Batchmodetbl">
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batchtbl_Wrksrctbl">
+          <End Role="Wrksrctbl" Type="ilockboxModel.Store.Wrksrctbl" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Batchtbl" Type="ilockboxModel.Store.Batchtbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wrksrctbl">
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+            </Principal>
+            <Dependent Role="Batchtbl">
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BatchValue_Wrksrctbl">
+          <End Role="Wrksrctbl" Type="ilockboxModel.Store.Wrksrctbl" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BatchValue" Type="ilockboxModel.Store.BatchValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wrksrctbl">
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+            </Principal>
+            <Dependent Role="BatchValue">
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailTbl_Batchtbl1">
+          <End Role="Batchtbl" Type="ilockboxModel.Store.Batchtbl" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DetailTbl" Type="ilockboxModel.Store.DetailTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batchtbl">
+              <PropertyRef Name="ProcessDt" />
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+              <PropertyRef Name="BatchNumber" />
+            </Principal>
+            <Dependent Role="DetailTbl">
+              <PropertyRef Name="ProcessDt" />
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+              <PropertyRef Name="BatchNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ImgTbl_Wrksrctbl">
+          <End Role="Wrksrctbl" Type="ilockboxModel.Store.Wrksrctbl" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ImgTbl" Type="ilockboxModel.Store.ImgTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wrksrctbl">
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+            </Principal>
+            <Dependent Role="ImgTbl">
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemSelectTbl_Wrksrctbl">
+          <End Role="Wrksrctbl" Type="ilockboxModel.Store.Wrksrctbl" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ItemSelectTbl" Type="ilockboxModel.Store.ItemSelectTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wrksrctbl">
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+            </Principal>
+            <Dependent Role="ItemSelectTbl">
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema></edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="ilockboxModel" Alias="Self" xmlns="http://schemas.microsoft.com/ado/2008/09/edm">
+        <EntityContainer Name="ilockboxEntities">
+          <EntitySet Name="Batchmodetbl" EntityType="ilockboxModel.Batchmodetbl" />
+          <EntitySet Name="Batchtbl" EntityType="ilockboxModel.Batchtbl" />
+          <EntitySet Name="BatchValue" EntityType="ilockboxModel.BatchValue" />
+          <EntitySet Name="DetailTbl" EntityType="ilockboxModel.DetailTbl" />
+          <EntitySet Name="ImgTbl" EntityType="ilockboxModel.ImgTbl" />
+          <EntitySet Name="ItemSelectTbl" EntityType="ilockboxModel.ItemSelectTbl" />
+          <EntitySet Name="Wrksrctbl" EntityType="ilockboxModel.Wrksrctbl" />
+          <AssociationSet Name="FK_Batchmodetbl_Wrksrctbl1" Association="ilockboxModel.FK_Batchmodetbl_Wrksrctbl1">
+            <End Role="Wrksrctbl" EntitySet="Wrksrctbl" />
+            <End Role="Batchmodetbl" EntitySet="Batchmodetbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_Batchtbl_Wrksrctbl" Association="ilockboxModel.FK_Batchtbl_Wrksrctbl">
+            <End Role="Wrksrctbl" EntitySet="Wrksrctbl" />
+            <End Role="Batchtbl" EntitySet="Batchtbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_DetailTbl_Batchtbl1" Association="ilockboxModel.FK_DetailTbl_Batchtbl1">
+            <End Role="Batchtbl" EntitySet="Batchtbl" />
+            <End Role="DetailTbl" EntitySet="DetailTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_BatchValue_Wrksrctbl" Association="ilockboxModel.FK_BatchValue_Wrksrctbl">
+            <End Role="Wrksrctbl" EntitySet="Wrksrctbl" />
+            <End Role="BatchValue" EntitySet="BatchValue" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ImgTbl_Wrksrctbl" Association="ilockboxModel.FK_ImgTbl_Wrksrctbl">
+            <End Role="Wrksrctbl" EntitySet="Wrksrctbl" />
+            <End Role="ImgTbl" EntitySet="ImgTbl" />
+          </AssociationSet>
+          <AssociationSet Name="FK_ItemSelectTbl_Wrksrctbl" Association="ilockboxModel.FK_ItemSelectTbl_Wrksrctbl">
+            <End Role="Wrksrctbl" EntitySet="Wrksrctbl" />
+            <End Role="ItemSelectTbl" EntitySet="ItemSelectTbl" />
+          </AssociationSet>
+        </EntityContainer>
+        <EntityType Name="Batchmodetbl">
+          <Key>
+            <PropertyRef Name="WorkSource" />
+            <PropertyRef Name="SubSet" />
+            <PropertyRef Name="BatchMode" />
+          </Key>
+          <Property Name="WorkSource" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="SubSet" Type="Int16" Nullable="false" />
+          <Property Name="BatchMode" Type="Int16" Nullable="false" />
+          <Property Name="Name" Type="String" MaxLength="10" Unicode="false" FixedLength="true" />
+          <NavigationProperty Name="Wrksrctbl" Relationship="ilockboxModel.FK_Batchmodetbl_Wrksrctbl1" FromRole="Batchmodetbl" ToRole="Wrksrctbl" />
+        </EntityType>
+        <EntityType Name="Batchtbl">
+          <Key>
+            <PropertyRef Name="ProcessDt" />
+            <PropertyRef Name="WorkSource" />
+            <PropertyRef Name="SubSet" />
+            <PropertyRef Name="BatchNumber" />
+          </Key>
+          <Property Name="ProcessDt" Type="DateTime" Nullable="false" />
+          <Property Name="WorkSource" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="SubSet" Type="Int16" Nullable="false" />
+          <Property Name="BatchNumber" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="Status" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <NavigationProperty Name="Wrksrctbl" Relationship="ilockboxModel.FK_Batchtbl_Wrksrctbl" FromRole="Batchtbl" ToRole="Wrksrctbl" />
+          <NavigationProperty Name="DetailTbl" Relationship="ilockboxModel.FK_DetailTbl_Batchtbl1" FromRole="Batchtbl" ToRole="DetailTbl" />
+        </EntityType>
+        <EntityType Name="BatchValue">
+          <Key>
+            <PropertyRef Name="WorkSource" />
+            <PropertyRef Name="SubSet" />
+            <PropertyRef Name="BatchMode" />
+          </Key>
+          <Property Name="WorkSource" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="SubSet" Type="Int16" Nullable="false" />
+          <Property Name="BatchMode" Type="Int16" Nullable="false" />
+          <Property Name="SelectedBatchValue" Type="Int16" Nullable="false" />
+          <Property Name="NextBatchValue" Type="Int16" />
+          <Property Name="WaitToUpdate" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <NavigationProperty Name="Wrksrctbl" Relationship="ilockboxModel.FK_BatchValue_Wrksrctbl" FromRole="BatchValue" ToRole="Wrksrctbl" />
+        </EntityType>
+        <EntityType Name="DetailTbl">
+          <Key>
+            <PropertyRef Name="SiteId" />
+            <PropertyRef Name="ProcessDt" />
+            <PropertyRef Name="WorkSource" />
+            <PropertyRef Name="SubSet" />
+            <PropertyRef Name="BatchNumber" />
+            <PropertyRef Name="TranNo" />
+            <PropertyRef Name="SeqNo" />
+            <PropertyRef Name="SubSeqNo" />
+          </Key>
+          <Property Name="SiteId" Type="Int16" Nullable="false" />
+          <Property Name="ProcessDt" Type="DateTime" Nullable="false" />
+          <Property Name="WorkSource" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="SubSet" Type="Int16" Nullable="false" />
+          <Property Name="BatchNumber" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="TranNo" Type="Int32" Nullable="false" />
+          <Property Name="SeqNo" Type="Int32" Nullable="false" />
+          <Property Name="SubSeqNo" Type="Int32" Nullable="false" />
+          <Property Name="P1ImgSeqNo" Type="Int32" />
+          <Property Name="P2ImgSeqNo" Type="Int32" />
+          <Property Name="ItemType" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="BatchType" Type="Int16" Nullable="false" />
+          <Property Name="UserFlag1" Type="String" MaxLength="16" Unicode="false" FixedLength="true" />
+          <Property Name="UserFlag2" Type="String" MaxLength="16" Unicode="false" FixedLength="true" />
+          <Property Name="UserFlag3" Type="String" MaxLength="16" Unicode="false" FixedLength="true" />
+          <Property Name="UserFlag4" Type="String" MaxLength="16" Unicode="false" FixedLength="true" />
+          <Property Name="UserInt1" Type="Int32" />
+          <Property Name="UserInt2" Type="Int32" />
+          <Property Name="UserInt3" Type="Int32" />
+          <Property Name="UserString1" Type="String" MaxLength="16" Unicode="false" FixedLength="true" />
+          <Property Name="UserString2" Type="String" MaxLength="16" Unicode="false" FixedLength="true" />
+          <Property Name="UserString3" Type="String" MaxLength="16" Unicode="false" FixedLength="true" />
+          <Property Name="SubType" Type="String" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="UserFlag5" Type="String" MaxLength="40" Unicode="false" FixedLength="true" />
+          <Property Name="UserFlag6" Type="String" MaxLength="16" Unicode="false" FixedLength="true" />
+          <NavigationProperty Name="Batchtbl" Relationship="ilockboxModel.FK_DetailTbl_Batchtbl1" FromRole="DetailTbl" ToRole="Batchtbl" />
+        </EntityType>
+        <EntityType Name="ImgTbl">
+          <Key>
+            <PropertyRef Name="WorkSource" />
+            <PropertyRef Name="SubSet" />
+            <PropertyRef Name="BatchMode" />
+          </Key>
+          <Property Name="WorkSource" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="SubSet" Type="Int16" Nullable="false" />
+          <Property Name="BatchMode" Type="Int16" Nullable="false" />
+          <Property Name="ImageDisp" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="ImagePost" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <NavigationProperty Name="Wrksrctbl" Relationship="ilockboxModel.FK_ImgTbl_Wrksrctbl" FromRole="ImgTbl" ToRole="Wrksrctbl" />
+        </EntityType>
+        <EntityType Name="ItemSelectTbl">
+          <Key>
+            <PropertyRef Name="WorkSource" />
+            <PropertyRef Name="SubSet" />
+            <PropertyRef Name="BatchMode" />
+          </Key>
+          <Property Name="WorkSource" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="SubSet" Type="Int16" Nullable="false" />
+          <Property Name="BatchMode" Type="Int16" Nullable="false" />
+          <Property Name="ItemDisp" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="ItemPost" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <NavigationProperty Name="Wrksrctbl" Relationship="ilockboxModel.FK_ItemSelectTbl_Wrksrctbl" FromRole="ItemSelectTbl" ToRole="Wrksrctbl" />
+        </EntityType>
+        <EntityType Name="Wrksrctbl">
+          <Key>
+            <PropertyRef Name="WorkSource" />
+            <PropertyRef Name="SubSet" />
+          </Key>
+          <Property Name="WorkSource" Type="String" Nullable="false" MaxLength="10" Unicode="false" FixedLength="true" />
+          <Property Name="SubSet" Type="Int16" Nullable="false" />
+          <Property Name="Name" Type="String" Nullable="false" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="ImagePath" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="true" />
+          <Property Name="XmlPath" Type="String" Nullable="false" MaxLength="80" Unicode="false" FixedLength="true" />
+          <Property Name="AutoTrans" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <Property Name="BelongsToGroup" Type="String" Nullable="false" MaxLength="60" Unicode="false" FixedLength="false" />
+          <Property Name="XmlImagePath" Type="String" MaxLength="80" Unicode="false" FixedLength="false" />
+          <Property Name="SiteID" Type="Int16" Nullable="false" />
+          <Property Name="ItemFilter" Type="String" MaxLength="20" Unicode="false" FixedLength="true" />
+          <Property Name="IsItActive" Type="String" Nullable="false" MaxLength="1" Unicode="false" FixedLength="true" />
+          <NavigationProperty Name="Batchmodetbl" Relationship="ilockboxModel.FK_Batchmodetbl_Wrksrctbl1" FromRole="Wrksrctbl" ToRole="Batchmodetbl" />
+          <NavigationProperty Name="Batchtbl" Relationship="ilockboxModel.FK_Batchtbl_Wrksrctbl" FromRole="Wrksrctbl" ToRole="Batchtbl" />
+          <NavigationProperty Name="BatchValue" Relationship="ilockboxModel.FK_BatchValue_Wrksrctbl" FromRole="Wrksrctbl" ToRole="BatchValue" />
+          <NavigationProperty Name="ImgTbl" Relationship="ilockboxModel.FK_ImgTbl_Wrksrctbl" FromRole="Wrksrctbl" ToRole="ImgTbl" />
+          <NavigationProperty Name="ItemSelectTbl" Relationship="ilockboxModel.FK_ItemSelectTbl_Wrksrctbl" FromRole="Wrksrctbl" ToRole="ItemSelectTbl" />
+        </EntityType>
+        <Association Name="FK_Batchmodetbl_Wrksrctbl1">
+          <End Role="Wrksrctbl" Type="ilockboxModel.Wrksrctbl" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Batchmodetbl" Type="ilockboxModel.Batchmodetbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wrksrctbl">
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+            </Principal>
+            <Dependent Role="Batchmodetbl">
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_Batchtbl_Wrksrctbl">
+          <End Role="Wrksrctbl" Type="ilockboxModel.Wrksrctbl" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="Batchtbl" Type="ilockboxModel.Batchtbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wrksrctbl">
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+            </Principal>
+            <Dependent Role="Batchtbl">
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_DetailTbl_Batchtbl1">
+          <End Role="Batchtbl" Type="ilockboxModel.Batchtbl" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="DetailTbl" Type="ilockboxModel.DetailTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Batchtbl">
+              <PropertyRef Name="ProcessDt" />
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+              <PropertyRef Name="BatchNumber" />
+            </Principal>
+            <Dependent Role="DetailTbl">
+              <PropertyRef Name="ProcessDt" />
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+              <PropertyRef Name="BatchNumber" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_BatchValue_Wrksrctbl">
+          <End Role="Wrksrctbl" Type="ilockboxModel.Wrksrctbl" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="BatchValue" Type="ilockboxModel.BatchValue" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wrksrctbl">
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+            </Principal>
+            <Dependent Role="BatchValue">
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ImgTbl_Wrksrctbl">
+          <End Role="Wrksrctbl" Type="ilockboxModel.Wrksrctbl" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ImgTbl" Type="ilockboxModel.ImgTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wrksrctbl">
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+            </Principal>
+            <Dependent Role="ImgTbl">
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="FK_ItemSelectTbl_Wrksrctbl">
+          <End Role="Wrksrctbl" Type="ilockboxModel.Wrksrctbl" Multiplicity="1">
+            <OnDelete Action="Cascade" />
+          </End>
+          <End Role="ItemSelectTbl" Type="ilockboxModel.ItemSelectTbl" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="Wrksrctbl">
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+            </Principal>
+            <Dependent Role="ItemSelectTbl">
+              <PropertyRef Name="WorkSource" />
+              <PropertyRef Name="SubSet" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2008/09/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="ilockboxModelStoreContainer" CdmEntityContainer="ilockboxEntities">
+          <EntitySetMapping Name="Batchmodetbl">
+            <EntityTypeMapping TypeName="IsTypeOf(ilockboxModel.Batchmodetbl)">
+              <MappingFragment StoreEntitySet="Batchmodetbl">
+                <ScalarProperty Name="WorkSource" ColumnName="WorkSource" />
+                <ScalarProperty Name="SubSet" ColumnName="SubSet" />
+                <ScalarProperty Name="BatchMode" ColumnName="BatchMode" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Batchtbl">
+            <EntityTypeMapping TypeName="IsTypeOf(ilockboxModel.Batchtbl)">
+              <MappingFragment StoreEntitySet="Batchtbl">
+                <ScalarProperty Name="ProcessDt" ColumnName="ProcessDt" />
+                <ScalarProperty Name="WorkSource" ColumnName="WorkSource" />
+                <ScalarProperty Name="SubSet" ColumnName="SubSet" />
+                <ScalarProperty Name="BatchNumber" ColumnName="BatchNumber" />
+                <ScalarProperty Name="Status" ColumnName="Status" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BatchValue">
+            <EntityTypeMapping TypeName="IsTypeOf(ilockboxModel.BatchValue)">
+              <MappingFragment StoreEntitySet="BatchValue">
+                <ScalarProperty Name="WorkSource" ColumnName="WorkSource" />
+                <ScalarProperty Name="SubSet" ColumnName="SubSet" />
+                <ScalarProperty Name="BatchMode" ColumnName="BatchMode" />
+                <ScalarProperty Name="SelectedBatchValue" ColumnName="SelectedBatchValue" />
+                <ScalarProperty Name="NextBatchValue" ColumnName="NextBatchValue" />
+                <ScalarProperty Name="WaitToUpdate" ColumnName="WaitToUpdate" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="DetailTbl">
+            <EntityTypeMapping TypeName="IsTypeOf(ilockboxModel.DetailTbl)">
+              <MappingFragment StoreEntitySet="DetailTbl">
+                <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+                <ScalarProperty Name="ProcessDt" ColumnName="ProcessDt" />
+                <ScalarProperty Name="WorkSource" ColumnName="WorkSource" />
+                <ScalarProperty Name="SubSet" ColumnName="SubSet" />
+                <ScalarProperty Name="BatchNumber" ColumnName="BatchNumber" />
+                <ScalarProperty Name="TranNo" ColumnName="TranNo" />
+                <ScalarProperty Name="SeqNo" ColumnName="SeqNo" />
+                <ScalarProperty Name="SubSeqNo" ColumnName="SubSeqNo" />
+                <ScalarProperty Name="P1ImgSeqNo" ColumnName="P1ImgSeqNo" />
+                <ScalarProperty Name="P2ImgSeqNo" ColumnName="P2ImgSeqNo" />
+                <ScalarProperty Name="ItemType" ColumnName="ItemType" />
+                <ScalarProperty Name="BatchType" ColumnName="BatchType" />
+                <ScalarProperty Name="UserFlag1" ColumnName="UserFlag1" />
+                <ScalarProperty Name="UserFlag2" ColumnName="UserFlag2" />
+                <ScalarProperty Name="UserFlag3" ColumnName="UserFlag3" />
+                <ScalarProperty Name="UserFlag4" ColumnName="UserFlag4" />
+                <ScalarProperty Name="UserInt1" ColumnName="UserInt1" />
+                <ScalarProperty Name="UserInt2" ColumnName="UserInt2" />
+                <ScalarProperty Name="UserInt3" ColumnName="UserInt3" />
+                <ScalarProperty Name="UserString1" ColumnName="UserString1" />
+                <ScalarProperty Name="UserString2" ColumnName="UserString2" />
+                <ScalarProperty Name="UserString3" ColumnName="UserString3" />
+                <ScalarProperty Name="SubType" ColumnName="SubType" />
+                <ScalarProperty Name="UserFlag5" ColumnName="UserFlag5" />
+                <ScalarProperty Name="UserFlag6" ColumnName="UserFlag6" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ImgTbl">
+            <EntityTypeMapping TypeName="IsTypeOf(ilockboxModel.ImgTbl)">
+              <MappingFragment StoreEntitySet="ImgTbl">
+                <ScalarProperty Name="WorkSource" ColumnName="WorkSource" />
+                <ScalarProperty Name="SubSet" ColumnName="SubSet" />
+                <ScalarProperty Name="BatchMode" ColumnName="BatchMode" />
+                <ScalarProperty Name="ImageDisp" ColumnName="ImageDisp" />
+                <ScalarProperty Name="ImagePost" ColumnName="ImagePost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="ItemSelectTbl">
+            <EntityTypeMapping TypeName="IsTypeOf(ilockboxModel.ItemSelectTbl)">
+              <MappingFragment StoreEntitySet="ItemSelectTbl">
+                <ScalarProperty Name="WorkSource" ColumnName="WorkSource" />
+                <ScalarProperty Name="SubSet" ColumnName="SubSet" />
+                <ScalarProperty Name="BatchMode" ColumnName="BatchMode" />
+                <ScalarProperty Name="ItemDisp" ColumnName="ItemDisp" />
+                <ScalarProperty Name="ItemPost" ColumnName="ItemPost" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Wrksrctbl">
+            <EntityTypeMapping TypeName="IsTypeOf(ilockboxModel.Wrksrctbl)">
+              <MappingFragment StoreEntitySet="Wrksrctbl">
+                <ScalarProperty Name="WorkSource" ColumnName="WorkSource" />
+                <ScalarProperty Name="SubSet" ColumnName="SubSet" />
+                <ScalarProperty Name="Name" ColumnName="Name" />
+                <ScalarProperty Name="ImagePath" ColumnName="ImagePath" />
+                <ScalarProperty Name="XmlPath" ColumnName="XmlPath" />
+                <ScalarProperty Name="AutoTrans" ColumnName="AutoTrans" />
+                <ScalarProperty Name="BelongsToGroup" ColumnName="BelongsToGroup" />
+                <ScalarProperty Name="XmlImagePath" ColumnName="XmlImagePath" />
+                <ScalarProperty Name="SiteID" ColumnName="SiteID" />
+                <ScalarProperty Name="ItemFilter" ColumnName="ItemFilter" />
+                <ScalarProperty Name="IsItActive" ColumnName="IsItActive" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <AssociationSetMapping Name="FK_Batchmodetbl_Wrksrctbl1" TypeName="ilockboxModel.FK_Batchmodetbl_Wrksrctbl1" StoreEntitySet="Batchmodetbl">
+            <EndProperty Name="Wrksrctbl">
+              <ScalarProperty Name="WorkSource" ColumnName="WorkSource" />
+              <ScalarProperty Name="SubSet" ColumnName="SubSet" />
+            </EndProperty>
+            <EndProperty Name="Batchmodetbl">
+              <ScalarProperty Name="WorkSource" ColumnName="WorkSource" />
+              <ScalarProperty Name="SubSet" ColumnName="SubSet" />
+              <ScalarProperty Name="BatchMode" ColumnName="BatchMode" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_Batchtbl_Wrksrctbl" TypeName="ilockboxModel.FK_Batchtbl_Wrksrctbl" StoreEntitySet="Batchtbl">
+            <EndProperty Name="Wrksrctbl">
+              <ScalarProperty Name="WorkSource" ColumnName="WorkSource" />
+              <ScalarProperty Name="SubSet" ColumnName="SubSet" />
+            </EndProperty>
+            <EndProperty Name="Batchtbl">
+              <ScalarProperty Name="ProcessDt" ColumnName="ProcessDt" />
+              <ScalarProperty Name="WorkSource" ColumnName="WorkSource" />
+              <ScalarProperty Name="SubSet" ColumnName="SubSet" />
+              <ScalarProperty Name="BatchNumber" ColumnName="BatchNumber" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_DetailTbl_Batchtbl1" TypeName="ilockboxModel.FK_DetailTbl_Batchtbl1" StoreEntitySet="DetailTbl">
+            <EndProperty Name="Batchtbl">
+              <ScalarProperty Name="ProcessDt" ColumnName="ProcessDt" />
+              <ScalarProperty Name="WorkSource" ColumnName="WorkSource" />
+              <ScalarProperty Name="SubSet" ColumnName="SubSet" />
+              <ScalarProperty Name="BatchNumber" ColumnName="BatchNumber" />
+            </EndProperty>
+            <EndProperty Name="DetailTbl">
+              <ScalarProperty Name="SiteId" ColumnName="SiteId" />
+              <ScalarProperty Name="ProcessDt" ColumnName="ProcessDt" />
+              <ScalarProperty Name="WorkSource" ColumnName="WorkSource" />
+              <ScalarProperty Name="SubSet" ColumnName="SubSet" />
+              <ScalarProperty Name="BatchNumber" ColumnName="BatchNumber" />
+              <ScalarProperty Name="TranNo" ColumnName="TranNo" />
+              <ScalarProperty Name="SeqNo" ColumnName="SeqNo" />
+              <ScalarProperty Name="SubSeqNo" ColumnName="SubSeqNo" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_BatchValue_Wrksrctbl" TypeName="ilockboxModel.FK_BatchValue_Wrksrctbl" StoreEntitySet="BatchValue">
+            <EndProperty Name="Wrksrctbl">
+              <ScalarProperty Name="WorkSource" ColumnName="WorkSource" />
+              <ScalarProperty Name="SubSet" ColumnName="SubSet" />
+            </EndProperty>
+            <EndProperty Name="BatchValue">
+              <ScalarProperty Name="WorkSource" ColumnName="WorkSource" />
+              <ScalarProperty Name="SubSet" ColumnName="SubSet" />
+              <ScalarProperty Name="BatchMode" ColumnName="BatchMode" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_ImgTbl_Wrksrctbl" TypeName="ilockboxModel.FK_ImgTbl_Wrksrctbl" StoreEntitySet="ImgTbl">
+            <EndProperty Name="Wrksrctbl">
+              <ScalarProperty Name="WorkSource" ColumnName="WorkSource" />
+              <ScalarProperty Name="SubSet" ColumnName="SubSet" />
+            </EndProperty>
+            <EndProperty Name="ImgTbl">
+              <ScalarProperty Name="WorkSource" ColumnName="WorkSource" />
+              <ScalarProperty Name="SubSet" ColumnName="SubSet" />
+              <ScalarProperty Name="BatchMode" ColumnName="BatchMode" />
+            </EndProperty>
+          </AssociationSetMapping>
+          <AssociationSetMapping Name="FK_ItemSelectTbl_Wrksrctbl" TypeName="ilockboxModel.FK_ItemSelectTbl_Wrksrctbl" StoreEntitySet="ItemSelectTbl">
+            <EndProperty Name="Wrksrctbl">
+              <ScalarProperty Name="WorkSource" ColumnName="WorkSource" />
+              <ScalarProperty Name="SubSet" ColumnName="SubSet" />
+            </EndProperty>
+            <EndProperty Name="ItemSelectTbl">
+              <ScalarProperty Name="WorkSource" ColumnName="WorkSource" />
+              <ScalarProperty Name="SubSet" ColumnName="SubSet" />
+              <ScalarProperty Name="BatchMode" ColumnName="BatchMode" />
+            </EndProperty>
+          </AssociationSetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <edmx:Designer>
+    <edmx:Connection>
+      <DesignerInfoPropertySet xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </edmx:Connection>
+    <edmx:Options>
+      <DesignerInfoPropertySet xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+      </DesignerInfoPropertySet>
+    </edmx:Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <edmx:Diagrams>
+      <Diagram Name="iLockbox" xmlns="http://schemas.microsoft.com/ado/2008/10/edmx">
+        <EntityTypeShape EntityType="ilockboxModel.Batchmodetbl" Width="1.5" PointX="3" PointY="1.625" Height="1.7566536458333335" IsExpanded="true" />
+        <EntityTypeShape EntityType="ilockboxModel.Batchtbl" Width="1.5" PointX="3" PointY="11" Height="2.0853483072916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="ilockboxModel.BatchValue" Width="1.5" PointX="3" PointY="15.375" Height="2.0853483072916674" IsExpanded="true" />
+        <EntityTypeShape EntityType="ilockboxModel.DetailTbl" Width="1.5" PointX="5.25" PointY="9.5" Height="5.2079475911458317" IsExpanded="true" />
+        <EntityTypeShape EntityType="ilockboxModel.ImgTbl" Width="1.5" PointX="3" PointY="4.125" Height="1.9210009765624996" IsExpanded="true" />
+        <EntityTypeShape EntityType="ilockboxModel.ItemSelectTbl" Width="1.5" PointX="3" PointY="6.75" Height="1.9210009765624996" IsExpanded="true" />
+        <EntityTypeShape EntityType="ilockboxModel.Wrksrctbl" Width="1.5" PointX="0.75" PointY="7.75" Height="3.5644742838541648" IsExpanded="true" />
+        <AssociationConnector Association="ilockboxModel.FK_Batchmodetbl_Wrksrctbl1" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.5" PointY="7.75" />
+          <ConnectorPoint PointX="1.5" PointY="2.5033268229166667" />
+          <ConnectorPoint PointX="3" PointY="2.5033268229166667" /></AssociationConnector>
+        <AssociationConnector Association="ilockboxModel.FK_Batchtbl_Wrksrctbl" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="11.157237141927082" />
+          <ConnectorPoint PointX="3" PointY="11.157237141927082" /></AssociationConnector>
+        <AssociationConnector Association="ilockboxModel.FK_DetailTbl_Batchtbl1" ManuallyRouted="false">
+          <ConnectorPoint PointX="4.5" PointY="12.042674153645834" />
+          <ConnectorPoint PointX="5.25" PointY="12.042674153645834" /></AssociationConnector>
+        <AssociationConnector Association="ilockboxModel.FK_BatchValue_Wrksrctbl" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.5" PointY="11.314474283854164" />
+          <ConnectorPoint PointX="1.5" PointY="16.417674153645834" />
+          <ConnectorPoint PointX="3" PointY="16.417674153645834" /></AssociationConnector>
+        <AssociationConnector Association="ilockboxModel.FK_ImgTbl_Wrksrctbl" ManuallyRouted="false">
+          <ConnectorPoint PointX="1.9062525" PointY="7.75" />
+          <ConnectorPoint PointX="1.9062525" PointY="5.08550048828125" />
+          <ConnectorPoint PointX="3" PointY="5.08550048828125" /></AssociationConnector>
+        <AssociationConnector Association="ilockboxModel.FK_ItemSelectTbl_Wrksrctbl" ManuallyRouted="false">
+          <ConnectorPoint PointX="2.25" PointY="8.21050048828125" />
+          <ConnectorPoint PointX="3" PointY="8.21050048828125" /></AssociationConnector></Diagram></edmx:Diagrams>
+  </edmx:Designer>
+</edmx:Edmx>

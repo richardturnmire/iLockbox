@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<ReferenceGroup xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xmlns:xsd="http://www.w3.org/2001/XMLSchema" ID="8eddb802-87e6-4291-8d6e-b2a86edc8e5c" xmlns="urn:schemas-microsoft-com:xml-dataservicemap">
+  <MetadataSources>
+    <MetadataSource Address="http://localhost:2029/iLockboxDataService.svc" Protocol="http" SourceId="1" />
+  </MetadataSources>
+  <Metadata>
+    <MetadataFile FileName="service.edmx" MetadataType="Edmx" ID="f46b1743-4a8c-4251-9203-b8efd471fefe" SourceId="1" SourceUrl="http://localhost:2029/iLockboxDataService.svc" />
+  </Metadata>
+  <Extensions />
+</ReferenceGroup>
